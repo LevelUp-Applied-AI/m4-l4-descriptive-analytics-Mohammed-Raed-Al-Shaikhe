@@ -2,45 +2,107 @@
 
 ## Dataset Overview
 
-- ~2000 student records
-- Missing values handled for commute and study hours
+- The dataset contains ~2000 student records across multiple departments.
+- Key variables include GPA, study hours, attendance, internship status, and scholarship type.
+- Missing values were present in:
+  - `commute_minutes` (~10%) → filled with median
+  - `study_hours_weekly` (~5%) → rows removed
+- Overall data quality is good after preprocessing.
+
+---
 
 ## Distribution Insights
 
-- GPA is slightly left-skewed
-- Most students fall between 2.5 and 3.5 GPA
-- Some departments show higher median GPA
+- GPA distribution is slightly left-skewed, with most students between 2.5 and 3.5.  
   (See output/gpa_distribution.png)
-  (See output/gpa_by_department.png)
 
-## Correlations
+- Study hours show moderate spread, with some high-study outliers.  
+  (See output/study_hours_distribution.png)
 
-- Study hours positively correlate with GPA
-- Attendance also shows positive relationship with GPA
-- Correlation does not imply causation
-  (See output/correlation_heatmap.png)
+- Attendance is generally high, with most students above 70%.  
+  (See output/attendance_distribution.png)
+
+- GPA across departments appears similar, with no major differences in median values.  
+  (See output/gpa_by_department.png and output/gpa_violin.png)
+
+---
+
+## Correlation Analysis
+
+- Study hours and GPA show a moderate positive correlation.
+- Attendance also positively correlates with GPA.
+- These relationships suggest that effort and engagement contribute to academic success.
+
+(See output/correlation_heatmap.png, output/study_vs_gpa.png)
+
+> Note: Correlation does not imply causation.
+
+---
 
 ## Hypothesis Testing
 
-### Internship vs GPA (t-test)
+### 1. Internship vs GPA (t-test)
 
-- t = 13.56
-- p < 0.001
-- Result is statistically significant
-- Students with internships have higher GPA
-- Effect size (Cohen’s d ≈ 0.71) indicates a moderate to large effect
+- t-statistic: **13.56**
+- p-value: **3.68e-40**
+- Result: Statistically significant (p < 0.05)
 
-### GPA across Departments (ANOVA)
+**Interpretation:**
+Students with internships have significantly higher GPAs than those without.  
+The effect size (Cohen’s d ≈ 0.71) indicates a moderate to large practical impact.
 
-- F = 0.67
-- p = 0.61
-- Result is not statistically significant
-- GPA does not differ significantly across departments
+---
+
+### 2. GPA Across Departments (ANOVA)
+
+- F-statistic: **0.67**
+- p-value: **0.61**
+- Result: Not statistically significant
+
+**Interpretation:**
+There is no significant difference in GPA across departments.
+
+---
+
+### 3. Post-hoc Analysis (Bonferroni)
+
+- All pairwise comparisons between departments were not significant.
+
+**Interpretation:**
+This confirms that academic performance is consistent across departments.
+
+---
+
+## Advanced Statistical Validation (Tier 3)
+
+- **Bootstrap Confidence Intervals:**
+  - Internship GPA: ~2.95 to 3.01
+  - No Internship GPA: ~2.68 to 2.72  
+    → Minimal overlap confirms strong group differences.
+
+- **Power Analysis:**
+  - Required sample size ≈ 32 per group  
+    → Dataset size is more than sufficient, increasing confidence in results.
+
+- **Simulation:**
+  - False positive rate ≈ 0.049  
+    → Confirms statistical tests behave as expected.
+
+---
 
 ## Recommendations
 
-1. Encourage internships, as students with internships have significantly higher GPAs (t-test results).
+1. **Encourage internships**
+   - Strong statistical evidence shows internships are associated with higher GPA.
 
-2. Promote study habit programs, since study hours show a positive correlation with GPA.
+2. **Promote structured study programs**
+   - Positive correlation between study hours and GPA suggests academic support programs could improve performance.
 
-3. Improve attendance monitoring, as higher attendance is associated with better academic performance.
+3. **Improve attendance monitoring**
+   - Attendance is positively linked to GPA, so reinforcing attendance policies may boost outcomes.
+
+---
+
+## Key Takeaway
+
+Internships are the strongest predictor of higher academic performance, supported by multiple statistical methods and validation techniques.
